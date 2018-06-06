@@ -45,7 +45,7 @@
                     var closure=a;
                     return function(){
                         closure1=$(this);
-                        authenticate(closure["url"],closure["login"],closure["password"],function(){createSqliteDB4ME(closure1,closure["url"]);});
+                        authenticate(closure["url"],closure["login"],closure["password"],function(){console.log(closure['url']);console.log(closure1);createSqliteDB4ME(closure1,closure["url"]);});
                     }
                 };
                 $(".media-list").find("button").last().click(cmd(list[i]));
@@ -121,6 +121,7 @@
 
         function createSqliteDB4ME(elem,url){
             var curl=url+"?service=WPS&version=1.0.0&request=Execute&Identifier=mm4me.createSqliteDB4ME&DataInputs=&ResponseDocument=Result@asReference=true;Result1@asReference=true;Result2@asReference=true&storeExecuteResponse=true&status=true";
+            console.log(curl);
             $.ajax({
                 method: "GET",
                 url: curl,
@@ -131,10 +132,12 @@
                     var statusLocation=$(data).find("ExecuteResponse").attr("statusLocation");
                     if(MM4ME_DEBUG)
                         console.log(statusLocation);
-                    ping(elem.parent().parent(),statusLocation,url);
+                    if(statusLocation)
+                        ping(elem.parent().parent(),statusLocation,url);
                     disconnect(url);
                 },
-                error: function(){
+                error: function(data){
+                    console.log(data);
                     alert("error !");
                 }
             });

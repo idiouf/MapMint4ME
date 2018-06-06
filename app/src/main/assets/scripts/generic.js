@@ -1,4 +1,4 @@
-var MM4ME_DEBUG=false;
+var MM4ME_DEBUG=true;
 var EDITION_TYPE_FILE=5;
 var mainTable={};
 var mtable=null;
@@ -1159,8 +1159,10 @@ function authenticate(url,login,passwd,func,func1){
         success: function(data){
             if(MM4ME_DEBUG)
                 console.log(data);
-            if(func)
+            if(func){
+                console.log("Call func!")
                 func();
+            }
         },
         error: function(){
             if(func1){
@@ -1187,7 +1189,8 @@ function authenticate(url,login,passwd,func,func1){
 
 function disconnect(url){
     var curl=url+"?service=WPS&request=Execute&version=1.0.0&Identifier=authenticate.clogOut&DataInputs=&RawDataOutput=Result";
-    console.log(curl);
+    if(MM4ME_DEBUG)
+        console.log(curl);
     $.ajax({
         method: "GET",
         url: curl,

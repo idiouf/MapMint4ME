@@ -20,7 +20,7 @@
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
-    <supports-screens android:anyDensity="false"/>
+    <supports-screens android:anyDensity="true"/>
     <permission android:name="fr.meteolib.android.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
     <uses-permission android:name="fr.meteolib.android.permission.C2D_MESSAGE" />
